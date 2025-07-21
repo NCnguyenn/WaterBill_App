@@ -279,8 +279,6 @@ namespace WaterBill
         // ====== Pay Invoice ======
         private void btnPay_Click_1(object sender, EventArgs e)
         {
-            lblPaymentInfo.Visible = true;
-
             if (lvWaterBill.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please select an invoice to pay.", "No Invoice Selected");
@@ -296,14 +294,17 @@ namespace WaterBill
                 sb.AppendLine("✅ Payment Details:");
                 sb.AppendLine($"Customer Name: {selected.CustomerName}");
                 sb.AppendLine($"Customer Type: {cboTypeOfCustomer.Text}");
+
                 if (cboTypeOfCustomer.Text == "Household customer")
                     sb.AppendLine($"Number of People: {txtNumberOfPeople.Text}");
+
                 sb.AppendLine($"Total Water Bill: {selected.WaterMoney:N0} VND");
                 sb.AppendLine($"Payment Time: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
 
-                lblPaymentInfo.Text = sb.ToString();
-                MessageBox.Show("Payment successful!", "Success");
+                // Hiển thị thông báo thanh toán thành công kèm thông tin
+                MessageBox.Show(sb.ToString(), "Payment Successful");
 
+                // Cập nhật trạng thái hóa đơn
                 lvWaterBill.Items[index].SubItems[5].Text = "Paid";
                 lvWaterBill.Items[index].BackColor = Color.LightGreen;
             }
