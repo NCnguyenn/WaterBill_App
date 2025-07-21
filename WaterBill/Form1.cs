@@ -229,6 +229,8 @@ namespace WaterBill
             invoices.Add(new Invoice
             {
                 CustomerName = customerName,
+                CustomerType = customerType,
+                NumberOfPeople = numberOfPeople,
                 LastMonthWaterMeter = lastMonthWaterMeter,
                 ThisMonthWaterMeter = thisMonthWaterMeter,
                 Consumption = consumption,
@@ -291,12 +293,10 @@ namespace WaterBill
                 Invoice selected = invoices[index];
 
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("✅ Payment Details:");
                 sb.AppendLine($"Customer Name: {selected.CustomerName}");
-                sb.AppendLine($"Customer Type: {cboTypeOfCustomer.Text}");
-
-                if (cboTypeOfCustomer.Text == "Household customer")
-                    sb.AppendLine($"Number of People: {txtNumberOfPeople.Text}");
+                sb.AppendLine($"Customer Type: {selected.CustomerType}");
+                if (selected.CustomerType == "Household customer")
+                    sb.AppendLine($"Number of People: {selected.NumberOfPeople}");
 
                 sb.AppendLine($"Total Water Bill: {selected.WaterMoney:N0} VND");
                 sb.AppendLine($"Payment Time: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
@@ -362,6 +362,8 @@ namespace WaterBill
         // ====== Invoice Class ======
         public class Invoice
         {
+            public string CustomerType { get; set; }        
+            public int NumberOfPeople { get; set; }
             public string CustomerName { get; set; }
             public double LastMonthWaterMeter { get; set; }
             public double ThisMonthWaterMeter { get; set; }
