@@ -158,7 +158,7 @@ namespace WaterBill
         {
             bool isHousehold = cboTypeOfCustomer.Text == "Household customer";
 
-            txtNumberOfPeople.ReadOnly = !isHousehold;
+            txtNumberOfPeople.Enabled = isHousehold;
 
             if (!isHousehold)
             {
