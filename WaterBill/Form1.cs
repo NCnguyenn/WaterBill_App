@@ -248,11 +248,11 @@ namespace WaterBill
             {
                 double avg = consumption / numberOfPeople;
 
-                if (avg < 10)
-                    waterMoney = avg * 5973 * numberOfPeople;
-                else if (avg < 20)
+                if (avg <=10)
+                    waterMoney = avg * 5973 * numberOfPeople ;
+                else if (avg > 10 &&  avg <= 20)
                     waterMoney = (10 * 5973 + (avg - 10) * 7052) * numberOfPeople;
-                else if (avg < 30)
+                else if (avg > 20 && avg <= 30)
                     waterMoney = (10 * 5973 + 10 * 7052 + (avg - 20) * 8699) * numberOfPeople;
                 else
                     waterMoney = (10 * 5973 + 10 * 7052 + 10 * 8699 + (avg - 30) * 15929) * numberOfPeople;
