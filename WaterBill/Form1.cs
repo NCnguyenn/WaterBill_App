@@ -242,19 +242,19 @@ namespace WaterBill
         private (double, double) Calculator(string customerType, int numberOfPeople, double lastMonthWaterMeter, double thisMonthWaterMeter)
         {
             double consumption = thisMonthWaterMeter - lastMonthWaterMeter;
-            double waterMoney = 0;
+            double waterMoney = 0; // Đây là giá nước đã bao gồm phí bảo vệ môi trường
 
             if (customerType == "Household customer")
             {
                 double avg = consumption / numberOfPeople;
 
-                if (avg <=10)
-                    waterMoney = avg * 5973 * numberOfPeople ;
-                else if (avg > 10 &&  avg <= 20)
+                if (avg <= 10)
+                    waterMoney = avg * 5973 * numberOfPeople;
+                else if (avg > 10 && avg <= 20)
                     waterMoney = (10 * 5973 + (avg - 10) * 7052) * numberOfPeople;
                 else if (avg > 20 && avg <= 30)
                     waterMoney = (10 * 5973 + 10 * 7052 + (avg - 20) * 8699) * numberOfPeople;
-                else
+                else // avg > 30
                     waterMoney = (10 * 5973 + 10 * 7052 + 10 * 8699 + (avg - 30) * 15929) * numberOfPeople;
             }
             else
@@ -271,8 +271,10 @@ namespace WaterBill
                 waterMoney = consumption * rate;
             }
 
-            double withEnvFee = waterMoney * 1.1;           // +10% phí môi trường
-            double totalBill = withEnvFee * (1 + VAT);      // +10% VAT
+            // Theo yêu cầu: "Environment Protection Fees (10% of the base price)... included in tiered rates"
+            // Tức là waterMoney đã bao gồm phí môi trường.
+            // Chỉ cần thêm 10% VAT vào tổng bill
+            double totalBill = waterMoney * (1 + VAT); // Chỉ tính VAT trên waterMoney đã bao gồm phí môi trường
 
             return (consumption, totalBill);
         }
