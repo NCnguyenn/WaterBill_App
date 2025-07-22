@@ -29,14 +29,15 @@ namespace WaterBill
         // ====== Form Load ======
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Khởi tạo danh sách loại khách hàng
+            // Initialize the list of customer types
+
             cboTypeOfCustomer.Items.Add("Household customer");
             cboTypeOfCustomer.Items.Add("Administrative agency, public services");
             cboTypeOfCustomer.Items.Add("Production units");
             cboTypeOfCustomer.Items.Add("Business services");
-        
 
-            // Cài đặt hiển thị danh sách hóa đơn
+            // Configure the display of the invoice list
+
             lvWaterBill.View = View.Details;
             lvWaterBill.Columns.Add("Customer Name", 200);
             lvWaterBill.Columns.Add("Last Month Water Meter", 200);
@@ -45,7 +46,7 @@ namespace WaterBill
             lvWaterBill.Columns.Add("Total Water Bill", 200);
             lvWaterBill.Columns.Add("Status", 150);
 
-            // Tooltip hướng dẫn nhập liệu
+            // Tooltip for data entry guidance
             ToolTip tooltip = new ToolTip();
             tooltip.SetToolTip(txtCustomerName, "Only enter letters and spaces.");
             tooltip.SetToolTip(txtLastMonthWaterMeter, "Enter a non-negative number.");
@@ -135,21 +136,21 @@ namespace WaterBill
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            // Xóa toàn bộ nội dung trong các ô nhập liệu
+            // Clear all content from the input fields
             txtCustomerName.Clear();
             txtNumberOfPeople.Clear();
             txtLastMonthWaterMeter.Clear();
             txtThisMonthWaterMeter.Clear();
             cboTypeOfCustomer.SelectedIndex = -1;
 
-            // Xóa lỗi hiển thị nếu có
+            // Clear display errors if any exist
             errorProvider1.Clear();
 
-            // Ẩn nhãn thông tin thanh toán nếu đang hiển thị
-            lblPaymentInfo.Text = "";
-            lblPaymentInfo.Visible = false;
+            // Hide the payment information label if currently displayed
+           /* lblPaymentInfo.Text = "";
+            lblPaymentInfo.Visible = false;*/
 
-            // Focus lại vào ô nhập đầu tiên
+            // Set focus back to the first input field
             txtCustomerName.Focus();
         }
 
@@ -171,14 +172,14 @@ namespace WaterBill
         // ====== Add Invoice ======
         private void btnCaculator_Click(object sender, EventArgs e)
         {
-            // Lấy dữ liệu người dùng
+            // Retrieve user input data
             string customerName = txtCustomerName.Text.Trim();
             string customerType = cboTypeOfCustomer.Text;
             int numberOfPeople = 0;
             double lastMonthWaterMeter = 0;
             double thisMonthWaterMeter = 0;
 
-            // Kiểm tra hợp lệ
+            // Validate input
             if (string.IsNullOrEmpty(customerName) || Regex.IsMatch(customerName, "[^a-zA-Z ]"))
             {
                 MessageBox.Show("Please enter a valid customer name (letters and spaces only).", "Validation Error");
@@ -211,12 +212,12 @@ namespace WaterBill
                 return;
             }
 
-            // Tính tiền nước
+            // Calculate the water bill
             var result = Calculator(customerType, numberOfPeople, lastMonthWaterMeter, thisMonthWaterMeter);
             double consumption = result.Item1;
             double totalBill = result.Item2;
 
-            // Thêm vào ListView
+            // Add to ListView
             ListViewItem item = new ListViewItem(customerName);
             item.SubItems.Add(lastMonthWaterMeter.ToString());
             item.SubItems.Add(thisMonthWaterMeter.ToString());
@@ -225,7 +226,7 @@ namespace WaterBill
             item.SubItems.Add("Unpaid");
             lvWaterBill.Items.Add(item);
 
-            // Lưu dữ liệu hóa đơn
+            // Save invoice data
             invoices.Add(new Invoice
             {
                 CustomerName = customerName,
@@ -242,7 +243,7 @@ namespace WaterBill
         private (double, double) Calculator(string customerType, int numberOfPeople, double lastMonthWaterMeter, double thisMonthWaterMeter)
         {
             double consumption = thisMonthWaterMeter - lastMonthWaterMeter;
-            double waterMoney = 0; // Đây là giá nước đã bao gồm phí bảo vệ môi trường
+            double waterMoney = 0; // This is the water price including environmental protection fees
 
             if (customerType == "Household customer")
             {
@@ -271,10 +272,7 @@ namespace WaterBill
                 waterMoney = consumption * rate;
             }
 
-            // Theo yêu cầu: "Environment Protection Fees (10% of the base price)... included in tiered rates"
-            // Tức là waterMoney đã bao gồm phí môi trường.
-            // Chỉ cần thêm 10% VAT vào tổng bill
-            double totalBill = waterMoney * (1 + VAT); // Chỉ tính VAT trên waterMoney đã bao gồm phí môi trường
+            double totalBill = waterMoney * (1 + VAT);// Apply VAT only to waterMoney that already includes environmental protection fees
 
             return (consumption, totalBill);
         }
@@ -303,10 +301,10 @@ namespace WaterBill
                 sb.AppendLine($"Total Water Bill: {selected.WaterMoney:N0} VND");
                 sb.AppendLine($"Payment Time: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
 
-                // Hiển thị thông báo thanh toán thành công kèm thông tin
+              
                 MessageBox.Show(sb.ToString(), "Payment Successful");
 
-                // Cập nhật trạng thái hóa đơn
+                // Update invoice status
                 lvWaterBill.Items[index].SubItems[5].Text = "Paid";
                 lvWaterBill.Items[index].BackColor = Color.LightGreen;
             }
@@ -372,5 +370,7 @@ namespace WaterBill
             public double Consumption { get; set; }
             public double WaterMoney { get; set; }
         }
+
+        
     }
 }
