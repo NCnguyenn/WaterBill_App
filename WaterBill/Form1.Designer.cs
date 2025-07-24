@@ -131,7 +131,7 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(3, 253);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(261, 39);
+            this.label2.Size = new System.Drawing.Size(199, 29);
             this.label2.TabIndex = 2;
             this.label2.Text = "Number Of People";
             // 
@@ -142,7 +142,7 @@
             this.lbTypeOfCustomer.ForeColor = System.Drawing.Color.Black;
             this.lbTypeOfCustomer.Location = new System.Drawing.Point(6, 160);
             this.lbTypeOfCustomer.Name = "lbTypeOfCustomer";
-            this.lbTypeOfCustomer.Size = new System.Drawing.Size(254, 39);
+            this.lbTypeOfCustomer.Size = new System.Drawing.Size(192, 29);
             this.lbTypeOfCustomer.TabIndex = 1;
             this.lbTypeOfCustomer.Text = "Type Of Customer";
             // 
@@ -153,7 +153,7 @@
             this.lbThisMonthWaterMeter.ForeColor = System.Drawing.Color.Black;
             this.lbThisMonthWaterMeter.Location = new System.Drawing.Point(-1, 457);
             this.lbThisMonthWaterMeter.Name = "lbThisMonthWaterMeter";
-            this.lbThisMonthWaterMeter.Size = new System.Drawing.Size(375, 39);
+            this.lbThisMonthWaterMeter.Size = new System.Drawing.Size(284, 29);
             this.lbThisMonthWaterMeter.TabIndex = 4;
             this.lbThisMonthWaterMeter.Text = "This Month\'s Water Meter:";
             // 
@@ -161,7 +161,7 @@
             // 
             this.txtThisMonthWaterMeter.Location = new System.Drawing.Point(0, 499);
             this.txtThisMonthWaterMeter.Name = "txtThisMonthWaterMeter";
-            this.txtThisMonthWaterMeter.Size = new System.Drawing.Size(371, 53);
+            this.txtThisMonthWaterMeter.Size = new System.Drawing.Size(371, 42);
             this.txtThisMonthWaterMeter.TabIndex = 6;
             // 
             // lbCustomerName
@@ -171,7 +171,7 @@
             this.lbCustomerName.ForeColor = System.Drawing.Color.Black;
             this.lbCustomerName.Location = new System.Drawing.Point(6, 62);
             this.lbCustomerName.Name = "lbCustomerName";
-            this.lbCustomerName.Size = new System.Drawing.Size(231, 39);
+            this.lbCustomerName.Size = new System.Drawing.Size(176, 29);
             this.lbCustomerName.TabIndex = 0;
             this.lbCustomerName.Text = "Customer Name";
             // 
@@ -179,14 +179,14 @@
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(0, 104);
             this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(371, 53);
+            this.txtCustomerName.Size = new System.Drawing.Size(371, 42);
             this.txtCustomerName.TabIndex = 5;
             // 
             // txtLastMonthWaterMeter
             // 
             this.txtLastMonthWaterMeter.Location = new System.Drawing.Point(0, 401);
             this.txtLastMonthWaterMeter.Name = "txtLastMonthWaterMeter";
-            this.txtLastMonthWaterMeter.Size = new System.Drawing.Size(374, 53);
+            this.txtLastMonthWaterMeter.Size = new System.Drawing.Size(374, 42);
             this.txtLastMonthWaterMeter.TabIndex = 8;
             // 
             // lbLastMonthWaterMeter
@@ -196,7 +196,7 @@
             this.lbLastMonthWaterMeter.ForeColor = System.Drawing.Color.Black;
             this.lbLastMonthWaterMeter.Location = new System.Drawing.Point(3, 359);
             this.lbLastMonthWaterMeter.Name = "lbLastMonthWaterMeter";
-            this.lbLastMonthWaterMeter.Size = new System.Drawing.Size(375, 39);
+            this.lbLastMonthWaterMeter.Size = new System.Drawing.Size(283, 29);
             this.lbLastMonthWaterMeter.TabIndex = 3;
             this.lbLastMonthWaterMeter.Text = "Last Month\'s Water Meter:";
             // 
@@ -205,7 +205,7 @@
             this.txtNumberOfPeople.Enabled = false;
             this.txtNumberOfPeople.Location = new System.Drawing.Point(-3, 303);
             this.txtNumberOfPeople.Name = "txtNumberOfPeople";
-            this.txtNumberOfPeople.Size = new System.Drawing.Size(374, 53);
+            this.txtNumberOfPeople.Size = new System.Drawing.Size(374, 42);
             this.txtNumberOfPeople.TabIndex = 7;
             // 
             // cboTypeOfCustomer
@@ -214,7 +214,7 @@
             this.cboTypeOfCustomer.FormattingEnabled = true;
             this.cboTypeOfCustomer.Location = new System.Drawing.Point(-6, 202);
             this.cboTypeOfCustomer.Name = "cboTypeOfCustomer";
-            this.cboTypeOfCustomer.Size = new System.Drawing.Size(377, 53);
+            this.cboTypeOfCustomer.Size = new System.Drawing.Size(377, 43);
             this.cboTypeOfCustomer.TabIndex = 9;
             this.cboTypeOfCustomer.SelectedIndexChanged += new System.EventHandler(this.cboTypeOfCustomer_SelectedIndexChanged);
             // 
@@ -222,7 +222,7 @@
             // 
             this.txtSearch.Location = new System.Drawing.Point(545, 221);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(532, 40);
+            this.txtSearch.Size = new System.Drawing.Size(532, 32);
             this.txtSearch.TabIndex = 1;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -233,7 +233,7 @@
             this.lbSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSearch.Location = new System.Drawing.Point(441, 222);
             this.lbSearch.Name = "lbSearch";
-            this.lbSearch.Size = new System.Drawing.Size(114, 39);
+            this.lbSearch.Size = new System.Drawing.Size(87, 29);
             this.lbSearch.TabIndex = 2;
             this.lbSearch.Text = "Search:";
             // 
@@ -256,7 +256,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(435, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1266, 58);
+            this.panel2.Size = new System.Drawing.Size(1253, 58);
             this.panel2.TabIndex = 4;
             // 
             // iconrestaurar
@@ -326,7 +326,7 @@
             this.btnPay.TabIndex = 6;
             this.btnPay.Text = "Pay";
             this.btnPay.UseVisualStyleBackColor = true;
-            this.btnPay.Click += new System.EventHandler(this.btnPay_Click_1);
+            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // btnDelete
             // 
@@ -344,11 +344,11 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1701, 710);
+            this.ClientSize = new System.Drawing.Size(1688, 710);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnPay);
             this.Controls.Add(this.panel2);
@@ -362,7 +362,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
