@@ -15,6 +15,8 @@ namespace WaterBill
     {
         // ====== Constants ======
         public const double VAT = 0.1;
+        public const double ENV_FEE = 0.1;
+
 
         // ====== Data ======
         private List<Invoice> invoices = new List<Invoice>();
@@ -266,7 +268,12 @@ namespace WaterBill
                         throw new ArgumentException("Invalid customer type.");
                 }
 
-                double totalBill = waterMoney * (1 + VAT);
+                // ➕ Thêm phí môi trường trước khi tính VAT
+                double withEnvFee = waterMoney + (waterMoney * ENV_FEE);
+
+                // ➕ VAT cuối cùng
+                double totalBill = withEnvFee + (withEnvFee * VAT);
+
                 return (consumption, totalBill);
             }
             catch (ArgumentException ex)
@@ -319,6 +326,7 @@ namespace WaterBill
             else
             {
                 MessageBox.Show("Invalid invoice index.", "Error");
+
             }
         }
 
@@ -337,6 +345,7 @@ namespace WaterBill
                 invoices.RemoveAt(index);
             }
         }
+
 
         // ====== Search ======
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -388,6 +397,8 @@ namespace WaterBill
             public double Consumption { get; set; }
             public double WaterMoney { get; set; }
             public bool IsPaid { get; set; } = false;
+            
         }
+        
     }
 }
