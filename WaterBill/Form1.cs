@@ -268,10 +268,9 @@ namespace WaterBill
                         throw new ArgumentException("Invalid customer type.");
                 }
 
-                // ➕ Thêm phí môi trường trước khi tính VAT
                 double withEnvFee = waterMoney + (waterMoney * ENV_FEE);
 
-                // ➕ VAT cuối cùng
+              
                 double totalBill = withEnvFee + (withEnvFee * VAT);
 
                 return (consumption, totalBill);
@@ -317,7 +316,7 @@ namespace WaterBill
 
                     MessageBox.Show(sb.ToString(), "Payment Successful");
 
-                    // ✅ Cập nhật trạng thái
+                   
                     selected.IsPaid = true;
                     selectedItem.SubItems[5].Text = "Paid";
                     selectedItem.BackColor = Color.LightGreen;
