@@ -56,6 +56,8 @@
             this.btnPay = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cboSortOption = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -131,7 +133,7 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(3, 253);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(199, 29);
+            this.label2.Size = new System.Drawing.Size(261, 39);
             this.label2.TabIndex = 2;
             this.label2.Text = "Number Of People";
             // 
@@ -142,7 +144,7 @@
             this.lbTypeOfCustomer.ForeColor = System.Drawing.Color.Black;
             this.lbTypeOfCustomer.Location = new System.Drawing.Point(6, 160);
             this.lbTypeOfCustomer.Name = "lbTypeOfCustomer";
-            this.lbTypeOfCustomer.Size = new System.Drawing.Size(192, 29);
+            this.lbTypeOfCustomer.Size = new System.Drawing.Size(254, 39);
             this.lbTypeOfCustomer.TabIndex = 1;
             this.lbTypeOfCustomer.Text = "Type Of Customer";
             // 
@@ -153,7 +155,7 @@
             this.lbThisMonthWaterMeter.ForeColor = System.Drawing.Color.Black;
             this.lbThisMonthWaterMeter.Location = new System.Drawing.Point(-1, 457);
             this.lbThisMonthWaterMeter.Name = "lbThisMonthWaterMeter";
-            this.lbThisMonthWaterMeter.Size = new System.Drawing.Size(284, 29);
+            this.lbThisMonthWaterMeter.Size = new System.Drawing.Size(375, 39);
             this.lbThisMonthWaterMeter.TabIndex = 4;
             this.lbThisMonthWaterMeter.Text = "This Month\'s Water Meter:";
             // 
@@ -161,7 +163,7 @@
             // 
             this.txtThisMonthWaterMeter.Location = new System.Drawing.Point(0, 499);
             this.txtThisMonthWaterMeter.Name = "txtThisMonthWaterMeter";
-            this.txtThisMonthWaterMeter.Size = new System.Drawing.Size(371, 42);
+            this.txtThisMonthWaterMeter.Size = new System.Drawing.Size(371, 53);
             this.txtThisMonthWaterMeter.TabIndex = 6;
             // 
             // lbCustomerName
@@ -171,7 +173,7 @@
             this.lbCustomerName.ForeColor = System.Drawing.Color.Black;
             this.lbCustomerName.Location = new System.Drawing.Point(6, 62);
             this.lbCustomerName.Name = "lbCustomerName";
-            this.lbCustomerName.Size = new System.Drawing.Size(176, 29);
+            this.lbCustomerName.Size = new System.Drawing.Size(231, 39);
             this.lbCustomerName.TabIndex = 0;
             this.lbCustomerName.Text = "Customer Name";
             // 
@@ -179,14 +181,14 @@
             // 
             this.txtCustomerName.Location = new System.Drawing.Point(0, 104);
             this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(371, 42);
+            this.txtCustomerName.Size = new System.Drawing.Size(371, 53);
             this.txtCustomerName.TabIndex = 5;
             // 
             // txtLastMonthWaterMeter
             // 
             this.txtLastMonthWaterMeter.Location = new System.Drawing.Point(0, 401);
             this.txtLastMonthWaterMeter.Name = "txtLastMonthWaterMeter";
-            this.txtLastMonthWaterMeter.Size = new System.Drawing.Size(374, 42);
+            this.txtLastMonthWaterMeter.Size = new System.Drawing.Size(374, 53);
             this.txtLastMonthWaterMeter.TabIndex = 8;
             // 
             // lbLastMonthWaterMeter
@@ -196,7 +198,7 @@
             this.lbLastMonthWaterMeter.ForeColor = System.Drawing.Color.Black;
             this.lbLastMonthWaterMeter.Location = new System.Drawing.Point(3, 359);
             this.lbLastMonthWaterMeter.Name = "lbLastMonthWaterMeter";
-            this.lbLastMonthWaterMeter.Size = new System.Drawing.Size(283, 29);
+            this.lbLastMonthWaterMeter.Size = new System.Drawing.Size(375, 39);
             this.lbLastMonthWaterMeter.TabIndex = 3;
             this.lbLastMonthWaterMeter.Text = "Last Month\'s Water Meter:";
             // 
@@ -205,7 +207,7 @@
             this.txtNumberOfPeople.Enabled = false;
             this.txtNumberOfPeople.Location = new System.Drawing.Point(-3, 303);
             this.txtNumberOfPeople.Name = "txtNumberOfPeople";
-            this.txtNumberOfPeople.Size = new System.Drawing.Size(374, 42);
+            this.txtNumberOfPeople.Size = new System.Drawing.Size(374, 53);
             this.txtNumberOfPeople.TabIndex = 7;
             // 
             // cboTypeOfCustomer
@@ -214,7 +216,7 @@
             this.cboTypeOfCustomer.FormattingEnabled = true;
             this.cboTypeOfCustomer.Location = new System.Drawing.Point(-6, 202);
             this.cboTypeOfCustomer.Name = "cboTypeOfCustomer";
-            this.cboTypeOfCustomer.Size = new System.Drawing.Size(377, 43);
+            this.cboTypeOfCustomer.Size = new System.Drawing.Size(377, 53);
             this.cboTypeOfCustomer.TabIndex = 9;
             this.cboTypeOfCustomer.SelectedIndexChanged += new System.EventHandler(this.cboTypeOfCustomer_SelectedIndexChanged);
             // 
@@ -222,7 +224,7 @@
             // 
             this.txtSearch.Location = new System.Drawing.Point(545, 221);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(532, 32);
+            this.txtSearch.Size = new System.Drawing.Size(532, 40);
             this.txtSearch.TabIndex = 1;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -233,7 +235,7 @@
             this.lbSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSearch.Location = new System.Drawing.Point(441, 222);
             this.lbSearch.Name = "lbSearch";
-            this.lbSearch.Size = new System.Drawing.Size(87, 29);
+            this.lbSearch.Size = new System.Drawing.Size(114, 39);
             this.lbSearch.TabIndex = 2;
             this.lbSearch.Text = "Search:";
             // 
@@ -342,13 +344,40 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // cboSortOption
+            // 
+            this.cboSortOption.FormattingEnabled = true;
+            this.cboSortOption.Items.AddRange(new object[] {
+            "Total Bill Ascending",
+            "Total Bill Descending",
+            "Unpaid First",
+            "Paid First"});
+            this.cboSortOption.Location = new System.Drawing.Point(1294, 221);
+            this.cboSortOption.Name = "cboSortOption";
+            this.cboSortOption.Size = new System.Drawing.Size(121, 41);
+            this.cboSortOption.TabIndex = 9;
+            this.cboSortOption.SelectedIndexChanged += new System.EventHandler(this.cboSortOption_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Snow;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(1227, 224);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 39);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Sort:";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1688, 710);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboSortOption);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnPay);
             this.Controls.Add(this.panel2);
@@ -404,6 +433,8 @@
         private System.Windows.Forms.Button btnPay;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox cboSortOption;
+        private System.Windows.Forms.Label label1;
     }
 }
 

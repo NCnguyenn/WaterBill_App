@@ -135,12 +135,14 @@ namespace WaterBill
         private void iconmaximizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            // iconrestaurar.Visible = true; iconmaximizar.Visible = false; 
+            iconrestaurar.Visible = true;
+            iconmaximizar.Visible = false;
         }
         private void iconrestaurar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
-            // iconrestaurar.Visible = false; iconmaximizar.Visible = true;
+            iconrestaurar.Visible = false;
+            iconmaximizar.Visible = true;
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -303,8 +305,14 @@ namespace WaterBill
                     return;
                 }
 
-                if (MessageBox.Show("Do you want to proceed with the payment?", "Payment Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                // Mở Form2 để xác nhận thanh toán
+                Form2 confirmForm = new Form2(selected);
+                confirmForm.StartPosition = FormStartPosition.CenterParent;
+                confirmForm.ShowDialog();
+
+                if (confirmForm.PaymentConfirmed)
                 {
+                    // Hiển thị chi tiết thanh toán
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine($"Customer Name: {selected.CustomerName}");
                     sb.AppendLine($"Customer Type: {selected.CustomerType}");
@@ -316,7 +324,7 @@ namespace WaterBill
 
                     MessageBox.Show(sb.ToString(), "Payment Successful");
 
-                   
+                    // Đánh dấu đã thanh toán
                     selected.IsPaid = true;
                     selectedItem.SubItems[5].Text = "Paid";
                     selectedItem.BackColor = Color.LightGreen;
@@ -325,7 +333,6 @@ namespace WaterBill
             else
             {
                 MessageBox.Show("Invalid invoice index.", "Error");
-
             }
         }
 
@@ -385,6 +392,36 @@ namespace WaterBill
             lvWaterBill.Items.Add(item);
         }
 
+        private void cboSortOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string option = cboSortOption.SelectedItem.ToString();
+
+            List<Invoice> sortedList;
+
+            switch (option)
+            {
+                case "Total Bill Ascending":
+                    sortedList = invoices.OrderBy(inv => inv.WaterMoney).ToList();
+                    break;
+                case "Total Bill Descending":
+                    sortedList = invoices.OrderByDescending(inv => inv.WaterMoney).ToList();
+                    break;
+                case "Unpaid First":
+                    sortedList = invoices.OrderBy(inv => inv.IsPaid).ToList();  // false = Unpaid
+                    break;
+                case "Paid First":
+                    sortedList = invoices.OrderByDescending(inv => inv.IsPaid).ToList();
+                    break;
+                default:
+                    sortedList = invoices;
+                    break;
+            }
+
+            lvWaterBill.Items.Clear();
+            sortedList.ForEach(AddInvoiceToListView);
+
+        }
+
         // ====== Invoice Class ======
         public class Invoice
         {
@@ -398,6 +435,7 @@ namespace WaterBill
             public bool IsPaid { get; set; } = false;
             
         }
+
         
     }
 }
