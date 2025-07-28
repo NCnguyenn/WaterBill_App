@@ -392,7 +392,6 @@ namespace WaterBill
                 lvWaterBill.Items.Add(item);
             }
         }
-
         // ====== Invoice Class ======
         public class Invoice
         {
