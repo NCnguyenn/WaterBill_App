@@ -56,6 +56,8 @@
             this.btnPay = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblSort = new System.Windows.Forms.Label();
+            this.cboSortOption = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -342,6 +344,28 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // lblSort
+            // 
+            this.lblSort.AutoSize = true;
+            this.lblSort.Location = new System.Drawing.Point(1170, 221);
+            this.lblSort.Name = "lblSort";
+            this.lblSort.Size = new System.Drawing.Size(69, 33);
+            this.lblSort.TabIndex = 9;
+            this.lblSort.Text = "Sort:";
+            // 
+            // cboSortOption
+            // 
+            this.cboSortOption.FormattingEnabled = true;
+            this.cboSortOption.Items.AddRange(new object[] {
+            "Total Bill Ascending",
+            "Total Bill Descending",
+            "Unpaid First",
+            "Paid First"});
+            this.cboSortOption.Location = new System.Drawing.Point(1279, 215);
+            this.cboSortOption.Name = "cboSortOption";
+            this.cboSortOption.Size = new System.Drawing.Size(212, 41);
+            this.cboSortOption.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
@@ -349,6 +373,8 @@
             this.BackColor = System.Drawing.Color.SeaShell;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1701, 710);
+            this.Controls.Add(this.cboSortOption);
+            this.Controls.Add(this.lblSort);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnPay);
             this.Controls.Add(this.panel2);
@@ -405,6 +431,8 @@
         private System.Windows.Forms.Button btnPay;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lblSort;
+        private System.Windows.Forms.ComboBox cboSortOption;
     }
 }
 

@@ -58,6 +58,11 @@ namespace WaterBill
             txtLastMonthWaterMeter.TextChanged += ValidateWaterMeter;
             txtThisMonthWaterMeter.TextChanged += ValidateWaterMeter;
 
+       
+
+            cboSortOption.SelectedIndexChanged += cboSortOption_SelectedIndexChanged;
+
+
         }
 
         private void ValidateCustomerName(object sender, EventArgs e)
@@ -243,7 +248,7 @@ namespace WaterBill
         private (double, double) Calculator(string customerType, int numberOfPeople, double lastMonthWaterMeter, double thisMonthWaterMeter)
         {
             double consumption = thisMonthWaterMeter - lastMonthWaterMeter;
-            double waterMoney = 0; // This is the water price including environmental protection fees
+            double waterMoney = 0;
 
             if (customerType == "Household customer")
             {
@@ -272,7 +277,9 @@ namespace WaterBill
                 waterMoney = consumption * rate;
             }
 
-            double totalBill = waterMoney * (1 + VAT);// Apply VAT only to waterMoney that already includes environmental protection fees
+            
+            double envFee = waterMoney * 0.1;
+            double totalBill = (waterMoney + envFee) * (1 + VAT); 
 
             return (consumption, totalBill);
         }
@@ -287,27 +294,27 @@ namespace WaterBill
                 return;
             }
 
-            if (MessageBox.Show("Do you want to proceed with the payment?", "Payment Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            int index = lvWaterBill.SelectedItems[0].Index;
+            Invoice selected = invoices[index];
+
+            if (lvWaterBill.Items[index].SubItems[5].Text == "Paid")
             {
-                int index = lvWaterBill.SelectedItems[0].Index;
-                Invoice selected = invoices[index];
+                MessageBox.Show("This invoice has already been paid.", "Notice");
+                return;
+            }
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine($"Customer Name: {selected.CustomerName}");
-                sb.AppendLine($"Customer Type: {selected.CustomerType}");
-                if (selected.CustomerType == "Household customer")
-                    sb.AppendLine($"Number of People: {selected.NumberOfPeople}");
+           
+            Form2 confirmForm = new Form2(selected);
+            confirmForm.ShowDialog();
 
-                sb.AppendLine($"Total Water Bill: {selected.WaterMoney:N0} VND");
-                sb.AppendLine($"Payment Time: {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
-
-              
-                MessageBox.Show(sb.ToString(), "Payment Successful");
-
-                // Update invoice status
+            if (confirmForm.PaymentConfirmed)
+            {
+                
                 lvWaterBill.Items[index].SubItems[5].Text = "Paid";
                 lvWaterBill.Items[index].BackColor = Color.LightGreen;
+                MessageBox.Show("Payment has been confirmed.", "Success");
             }
+            invoices[lvWaterBill.SelectedIndices[0]].IsPaid = true;
         }
 
         // ====== Delete Invoice ======
@@ -330,33 +337,60 @@ namespace WaterBill
         // ====== Search ======
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            string search = txtSearch.Text.Trim().ToLower();
-            lvWaterBill.Items.Clear();
+             string keyword = txtSearch.Text.Trim().ToLower();
 
-            foreach (Invoice invoice in invoices)
-            {
-                if (string.IsNullOrEmpty(search) || invoice.CustomerName.ToLower().Contains(search))
-                {
-                    AddInvoiceToListView(invoice);
-                }
-            }
+    var filtered = invoices
+        .Where(inv => inv.CustomerName.ToLower().Contains(keyword))
+        .ToList();
 
-            if (!invoices.Any(inv => inv.CustomerName.ToLower().Contains(search)))
-            {
-                MessageBox.Show("No matching result found.", "Search");
-            }
+    UpdateListView(filtered);
         }
 
-        // ====== Utility ======
-        private void AddInvoiceToListView(Invoice invoice)
+
+      
+        private void cboSortOption_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListViewItem item = new ListViewItem(invoice.CustomerName);
-            item.SubItems.Add(invoice.LastMonthWaterMeter.ToString());
-            item.SubItems.Add(invoice.ThisMonthWaterMeter.ToString());
-            item.SubItems.Add(invoice.Consumption.ToString());
-            item.SubItems.Add(invoice.WaterMoney.ToString());
-            item.SubItems.Add("Unpaid");
-            lvWaterBill.Items.Add(item);
+            string option = cboSortOption.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(option)) return;
+
+            List<Invoice> sortedList = new List<Invoice>(invoices);
+
+            switch (option)
+            {
+                case "Total Bill Ascending":
+                    sortedList = invoices.OrderBy(inv => inv.WaterMoney).ToList();
+                    break;
+                case "Total Bill Descending":
+                    sortedList = invoices.OrderByDescending(inv => inv.WaterMoney).ToList();
+                    break;
+                case "Unpaid First":
+                    sortedList = invoices.OrderBy(inv => inv.IsPaid).ToList(); // false trước
+                    break;
+                case "Paid First":
+                    sortedList = invoices.OrderByDescending(inv => inv.IsPaid).ToList(); // true trước
+                    break;
+            }
+
+            UpdateListView(sortedList);
+        }
+        private void UpdateListView(List<Invoice> list)
+        {
+            lvWaterBill.Items.Clear();
+
+            foreach (Invoice inv in list)
+            {
+                ListViewItem item = new ListViewItem(inv.CustomerName);
+                item.SubItems.Add(inv.LastMonthWaterMeter.ToString());
+                item.SubItems.Add(inv.ThisMonthWaterMeter.ToString());
+                item.SubItems.Add(inv.Consumption.ToString());
+                item.SubItems.Add(inv.WaterMoney.ToString("N0"));
+                item.SubItems.Add(inv.IsPaid ? "Paid" : "Unpaid");
+
+                if (inv.IsPaid)
+                    item.BackColor = Color.LightGreen;
+
+                lvWaterBill.Items.Add(item);
+            }
         }
 
         // ====== Invoice Class ======
@@ -369,6 +403,7 @@ namespace WaterBill
             public double ThisMonthWaterMeter { get; set; }
             public double Consumption { get; set; }
             public double WaterMoney { get; set; }
+            public bool IsPaid { get; set; }
         }
 
         
